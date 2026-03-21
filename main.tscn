@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://vx1tpxiycqu3"]
+
+[ext_resource type="Script" uid="uid://bmxmm8kjvf18m" path="res://actors/player/player.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://d1ylwiymvmqbq" path="res://icon.svg" id="2_0xm2m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dm0k"]
+size = Vector2(336, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig7tw"]
+size = Vector2(16, 196)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(8, 8)
+
+[node name="Main" type="Node2D" unique_id=414262619]
+
+[node name="Floor" type="Polygon2D" parent="." unique_id=976801144]
+position = Vector2(160, 90)
+color = Color(0.24477637, 0.2447764, 0.24477637, 1)
+polygon = PackedVector2Array(-160, -90, 160, -90, 160, 90, -160, 90)
+
+[node name="WallNorth" type="StaticBody2D" parent="." unique_id=1727444183]
+position = Vector2(160, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallNorth" unique_id=1942677608]
+shape = SubResource("RectangleShape2D_7dm0k")
+debug_color = Color(0, 0, 0, 0.25882354)
+
+[node name="Polygon2D" type="Polygon2D" parent="WallNorth" unique_id=1648558359]
+color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+polygon = PackedVector2Array(-168, -8, 168, -8, 168, 8, -168, 8)
+
+[node name="WallSouth" type="StaticBody2D" parent="." unique_id=1311713242]
+position = Vector2(160, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallSouth" unique_id=213590008]
+shape = SubResource("RectangleShape2D_7dm0k")
+debug_color = Color(0, 0, 0, 0.25882354)
+
+[node name="Polygon2D" type="Polygon2D" parent="WallSouth" unique_id=1329337428]
+color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+polygon = PackedVector2Array(-168, -8, 168, -8, 168, 8, -168, 8)
+
+[node name="WallWest" type="StaticBody2D" parent="." unique_id=846257063]
+position = Vector2(0, 90)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallWest" unique_id=1510756918]
+shape = SubResource("RectangleShape2D_ig7tw")
+debug_color = Color(0, 0, 0, 0.25882354)
+
+[node name="Polygon2D" type="Polygon2D" parent="WallWest" unique_id=386795860]
+color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
+
+[node name="WallEast" type="StaticBody2D" parent="." unique_id=934804065]
+position = Vector2(320, 90)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallEast" unique_id=770934385]
+shape = SubResource("RectangleShape2D_ig7tw")
+debug_color = Color(0, 0, 0, 0.25882354)
+
+[node name="Polygon2D" type="Polygon2D" parent="WallEast" unique_id=596270337]
+color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1551085595]
+position = Vector2(163, 86)
+script = ExtResource("1_ig7tw")
+
+[node name="Polygon2D" type="Polygon2D" parent="Player" unique_id=162106869]
+color = Color(1, 1, 0, 1)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1762701887]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_0xm2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=817587132]
+visible = false
+shape = SubResource("RectangleShape2D_0xm2m")
+debug_color = Color(0.9627338, 0.87821406, 1.1551381e-06, 0.5411765)
+
+[node name="HurtBox" type="Area2D" parent="Player" unique_id=1436726267]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HurtBox" unique_id=1436595902]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="AttackHitBox" type="Area2D" parent="Player" unique_id=1040292975]
+position = Vector2(-16, -12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/AttackHitBox" unique_id=1475423902]
+shape = SubResource("RectangleShape2D_1bvp3")
+disabled = true
+
+[node name="Timer" type="Timer" parent="Player/AttackHitBox" unique_id=879245189]
+wait_time = 0.15
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=240339067]
+
+[connection signal="timeout" from="Player/AttackHitBox/Timer" to="Player" method="_on_timer_timeout"]
