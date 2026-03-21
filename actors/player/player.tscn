@@ -2,13 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bmxmm8kjvf18m" path="res://actors/player/player.gd" id="1_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://d1ylwiymvmqbq" path="res://icon.svg" id="2_hqtel"]
-[ext_resource type="PackedScene" uid="uid://bro0vt36lef0c" path="res://actors/hurt_box.tscn" id="3_sweqy"]
+[ext_resource type="Script" uid="uid://pwgft0glnqsa" path="res://actors/hurt_box.gd" id="4_lsqbn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6p1w3"]
+size = Vector2(10, 10)
 
 [node name="Player" type="CharacterBody2D" unique_id=289554604]
 script = ExtResource("1_i3pqv")
@@ -26,8 +29,6 @@ visible = false
 shape = SubResource("RectangleShape2D_0xm2m")
 debug_color = Color(0.9627338, 0.87821406, 1.1551381e-06, 0.5411765)
 
-[node name="HurtBox" parent="." unique_id=2081374412 instance=ExtResource("3_sweqy")]
-
 [node name="AttackHitBox" type="Area2D" parent="." unique_id=998222026 groups=["hitbox"]]
 position = Vector2(-16, -12)
 
@@ -42,14 +43,21 @@ one_shot = true
 [node name="Camera2D" type="Camera2D" parent="." unique_id=402713593]
 
 [node name="RollTimer" type="Timer" parent="." unique_id=180613411]
-wait_time = 0.15
+wait_time = 0.175
 one_shot = true
 
 [node name="RollCooldownTimer" type="Timer" parent="." unique_id=1452363848]
 wait_time = 0.6
 one_shot = true
 
-[connection signal="hit" from="HurtBox" to="." method="_on_hurt_box_hit"]
+[node name="HurtBox" type="Area2D" parent="." unique_id=1839867749]
+script = ExtResource("4_lsqbn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=169376859]
+shape = SubResource("RectangleShape2D_6p1w3")
+
 [connection signal="timeout" from="AttackHitBox/Timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
 [connection signal="timeout" from="RollCooldownTimer" to="." method="_on_roll_cooldown_timer_timeout"]
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
+[connection signal="hit" from="HurtBox" to="." method="_on_hurt_box_hit"]
