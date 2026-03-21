@@ -13,7 +13,7 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6p1w3"]
 size = Vector2(10, 10)
 
-[node name="Player" type="CharacterBody2D" unique_id=289554604]
+[node name="Player" type="CharacterBody2D" unique_id=289554604 groups=["player"]]
 script = ExtResource("1_i3pqv")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1819048621]
@@ -39,8 +39,6 @@ disabled = true
 [node name="Timer" type="Timer" parent="AttackHitBox" unique_id=1414266864]
 wait_time = 0.15
 one_shot = true
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=402713593]
 
 [node name="RollTimer" type="Timer" parent="." unique_id=180613411]
 wait_time = 0.175

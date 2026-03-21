@@ -30,6 +30,7 @@ project/assembly_name="One step from death"
 [global_group]
 
 hitbox=""
+player=""
 
 [input]
 

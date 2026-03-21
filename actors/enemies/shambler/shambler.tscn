@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://c2a7f40kd7eq0"]
+
+[ext_resource type="Script" uid="uid://d2idohe1i176i" path="res://actors/enemies/shambler/shambler.gd" id="1_2hdus"]
+[ext_resource type="Script" uid="uid://x6170xq68rrd" path="res://components/state_machine.gd" id="2_duj33"]
+[ext_resource type="Script" uid="uid://bpxyhxgex36yw" path="res://actors/enemies/shambler/states/idle_state.gd" id="3_f3dtn"]
+[ext_resource type="Script" uid="uid://d4metukvy16kk" path="res://actors/enemies/shambler/states/chase_state.gd" id="4_7o1q8"]
+[ext_resource type="Script" uid="uid://b65dkmhfsyovg" path="res://debug/status_label.gd" id="5_7bp7g"]
+[ext_resource type="Script" uid="uid://doaed1r1r0iyd" path="res://actors/enemies/shambler/states/lunge_state.gd" id="5_duj33"]
+[ext_resource type="Script" uid="uid://nk72jsno0jrx" path="res://actors/enemies/shambler/states/recovery_state.gd" id="6_f3dtn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ig7tw"]
+font_size = 8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(16, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ig7tw"]
+radius = 5.0
+height = 16.0
+
+[node name="Shambler" type="CharacterBody2D" unique_id=1724040096]
+script = ExtResource("1_2hdus")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1995301122]
+script = ExtResource("2_duj33")
+
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=1758216034]
+script = ExtResource("3_f3dtn")
+
+[node name="ChaseState" type="Node" parent="StateMachine" unique_id=417914785]
+script = ExtResource("4_7o1q8")
+
+[node name="LungeState" type="Node" parent="StateMachine" unique_id=1301156108]
+script = ExtResource("5_duj33")
+
+[node name="RecoveryState" type="Node" parent="StateMachine" unique_id=1001115547]
+script = ExtResource("6_f3dtn")
+
+[node name="StatusLabel" type="Label" parent="." unique_id=390075714 node_paths=PackedStringArray("state_machine")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_top = -20.0
+offset_right = 13.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Status"
+label_settings = SubResource("LabelSettings_ig7tw")
+script = ExtResource("5_7bp7g")
+state_machine = NodePath("../StateMachine")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=647607275]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1535115056]
+shape = SubResource("RectangleShape2D_h2yge")
+disabled = true
+debug_color = Color(1, 0.016008649, 0.024270412, 0.41960785)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=896401867]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=463339632]
+shape = SubResource("CapsuleShape2D_ig7tw")
+
+[node name="LungeWindupTimer" type="Timer" parent="." unique_id=2096373260]
+wait_time = 0.8
+one_shot = true
+
+[node name="LungeTimer" type="Timer" parent="." unique_id=1286420521]
+wait_time = 0.15
+one_shot = true
+
+[node name="RecoveryTimer" type="Timer" parent="." unique_id=481563301]
+one_shot = true
+
+[connection signal="timeout" from="LungeWindupTimer" to="StateMachine/LungeState" method="_on_lunge_windup_timer_timeout"]
+[connection signal="timeout" from="LungeTimer" to="StateMachine/LungeState" method="_on_lunge_timer_timeout"]
+[connection signal="timeout" from="RecoveryTimer" to="StateMachine/RecoveryState" method="_on_recovery_timer_timeout"]
