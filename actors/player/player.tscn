@@ -2,16 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bmxmm8kjvf18m" path="res://actors/player/player.gd" id="1_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://d1ylwiymvmqbq" path="res://icon.svg" id="2_hqtel"]
-[ext_resource type="Script" uid="uid://pwgft0glnqsa" path="res://actors/hurt_box.gd" id="4_lsqbn"]
+[ext_resource type="PackedScene" uid="uid://dbhn08kroce3b" path="res://components/hurtbox.tscn" id="3_ax26v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 size = Vector2(8, 8)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6p1w3"]
-size = Vector2(10, 10)
 
 [node name="Player" type="CharacterBody2D" unique_id=289554604 groups=["player"]]
 script = ExtResource("1_i3pqv")
@@ -41,21 +38,16 @@ wait_time = 0.15
 one_shot = true
 
 [node name="RollTimer" type="Timer" parent="." unique_id=180613411]
-wait_time = 0.175
+wait_time = 0.1
 one_shot = true
 
 [node name="RollCooldownTimer" type="Timer" parent="." unique_id=1452363848]
 wait_time = 0.6
 one_shot = true
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=1839867749]
-script = ExtResource("4_lsqbn")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=169376859]
-shape = SubResource("RectangleShape2D_6p1w3")
+[node name="Hurtbox" parent="." unique_id=364259304 instance=ExtResource("3_ax26v")]
 
 [connection signal="timeout" from="AttackHitBox/Timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
 [connection signal="timeout" from="RollCooldownTimer" to="." method="_on_roll_cooldown_timer_timeout"]
-[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
-[connection signal="hit" from="HurtBox" to="." method="_on_hurt_box_hit"]
+[connection signal="hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]

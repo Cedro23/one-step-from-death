@@ -11,7 +11,7 @@ var input_direction: Vector2
 @onready var attack_hitbox_collision: CollisionShape2D = $AttackHitBox/CollisionShape2D
 var is_attacking: bool = false
 
-@onready var hurtbox: Area2D = $HurtBox
+@onready var hurtbox: Area2D = $Hurtbox
 @onready var roll_timer: Timer = $RollTimer
 @onready var roll_cooldown_timer: Timer = $RollCooldownTimer
 var is_rolling: bool = false
@@ -28,8 +28,8 @@ func update_sprite_direction():
 		sprite.flip_h = false
 	
 #region Attack Hitbox
-func trigger_attack_hitbox(position: Vector2):
-	attack_hitbox.position = position
+func trigger_attack_hitbox(hitbox_pos: Vector2):
+	attack_hitbox.position = hitbox_pos
 	attack_hitbox_collision.disabled = false
 	is_attacking = true
 	attack_hitbox_timer.start()
@@ -58,13 +58,13 @@ func _on_roll_cooldown_timer_timeout():
 	can_roll = true
 #endregion
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	get_input()
 	if !is_rolling:
 		velocity = input_direction * speed
 	move_and_slide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_sprite_direction()
 		
 func _input(event: InputEvent) -> void:
@@ -74,5 +74,5 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dodge") and can_roll:
 		roll()
 
-func _on_hurt_box_hit() -> void:
+func _on_hurtbox_hit() -> void:
 	get_tree().reload_current_scene()
