@@ -23,6 +23,8 @@ size = Vector2(5, 12)
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_2hdus")
+lunge_speed = 500.0
+lunge_detection_distance = 80.0
 
 [node name="StateMachine" type="Node" parent="." unique_id=1995301122]
 script = ExtResource("2_duj33")
@@ -80,7 +82,7 @@ collision_mask = 4
 size = 14
 
 [node name="LungeWindupTimer" type="Timer" parent="." unique_id=2096373260]
-wait_time = 0.8
+wait_time = 0.6
 one_shot = true
 
 [node name="LungeTimer" type="Timer" parent="." unique_id=1286420521]

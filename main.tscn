@@ -66,6 +66,7 @@ polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
 
 [node name="Player" parent="." unique_id=289554604 instance=ExtResource("1_ig7tw")]
 position = Vector2(282, 91)
+run_speed = 150.0
 
 [node name="Shambler" parent="." unique_id=1724040096 instance=ExtResource("2_0xm2m")]
 position = Vector2(84, 88)
@@ -75,3 +76,6 @@ position = Vector2(160, 90)
 
 [node name="Shambler2" parent="." unique_id=2070421988 instance=ExtResource("2_0xm2m")]
 position = Vector2(120, 143)
+
+[node name="Shambler3" parent="." unique_id=792841733 instance=ExtResource("2_0xm2m")]
+position = Vector2(150, 53)

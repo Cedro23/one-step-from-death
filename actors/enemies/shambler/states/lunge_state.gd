@@ -1,6 +1,5 @@
 extends State
 
-const LUNGE_SPEED: float = 300.0
 @onready var lunge_windup_timer: Timer = $"../../LungeWindupTimer"
 @onready var lunge_timer: Timer = $"../../LungeTimer"
 
@@ -28,7 +27,7 @@ func physics_update(_delta: float) -> void:
 
 func _on_lunge_windup_timer_timeout() -> void:
 	hitbox_collision.disabled = false
-	character.velocity = direction * LUNGE_SPEED
+	character.velocity = direction * character.lunge_speed
 	lunge_timer.start()
 
 func _on_lunge_timer_timeout() -> void:

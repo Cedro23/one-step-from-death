@@ -77,7 +77,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="RollCooldownTimer" type="Timer" parent="." unique_id=1452363848]
-wait_time = 0.6
+wait_time = 0.8
 one_shot = true
 
 [node name="Hurtbox" parent="." unique_id=364259304 instance=ExtResource("3_ax26v")]
