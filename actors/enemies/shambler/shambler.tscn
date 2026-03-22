@@ -62,6 +62,8 @@ script = ExtResource("5_7bp7g")
 state_machine = NodePath("../StateMachine")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=647607275]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1535115056]
 shape = SubResource("RectangleShape2D_h2yge")
