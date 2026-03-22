@@ -21,6 +21,8 @@ size = Vector2(8, 8)
 font_size = 8
 
 [node name="Player" type="CharacterBody2D" unique_id=289554604 groups=["player"]]
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_i3pqv")
 
 [node name="StateMachine" type="Node" parent="." unique_id=233320353]
@@ -56,6 +58,8 @@ debug_color = Color(0.9627338, 0.87821406, 1.1551381e-06, 0.5411765)
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=998222026 groups=["hitbox"]]
 position = Vector2(-16, -12)
+collision_layer = 4
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=680156563]
 shape = SubResource("RectangleShape2D_1bvp3")
@@ -74,6 +78,8 @@ wait_time = 0.6
 one_shot = true
 
 [node name="Hurtbox" parent="." unique_id=364259304 instance=ExtResource("3_ax26v")]
+collision_layer = 2
+collision_mask = 17
 
 [node name="StatusLabel" type="Label" parent="." unique_id=205891787 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 7

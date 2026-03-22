@@ -20,6 +20,7 @@ polygon = PackedVector2Array(-160, -90, 160, -90, 160, 90, -160, 90)
 
 [node name="WallNorth" type="StaticBody2D" parent="." unique_id=1727444183]
 position = Vector2(160, 0)
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallNorth" unique_id=1942677608]
 shape = SubResource("RectangleShape2D_7dm0k")
@@ -31,6 +32,7 @@ polygon = PackedVector2Array(-168, -8, 168, -8, 168, 8, -168, 8)
 
 [node name="WallSouth" type="StaticBody2D" parent="." unique_id=1311713242]
 position = Vector2(160, 180)
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallSouth" unique_id=213590008]
 shape = SubResource("RectangleShape2D_7dm0k")
@@ -42,6 +44,7 @@ polygon = PackedVector2Array(-168, -8, 168, -8, 168, 8, -168, 8)
 
 [node name="WallWest" type="StaticBody2D" parent="." unique_id=846257063]
 position = Vector2(0, 90)
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallWest" unique_id=1510756918]
 shape = SubResource("RectangleShape2D_ig7tw")
@@ -53,6 +56,7 @@ polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
 
 [node name="WallEast" type="StaticBody2D" parent="." unique_id=934804065]
 position = Vector2(320, 90)
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallEast" unique_id=770934385]
 shape = SubResource("RectangleShape2D_ig7tw")
@@ -77,3 +81,6 @@ position = Vector2(84, 88)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=229455510]
 position = Vector2(160, 90)
+
+[node name="Shambler2" parent="." unique_id=2070421988 instance=ExtResource("2_0xm2m")]
+position = Vector2(120, 143)

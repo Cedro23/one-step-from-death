@@ -1,4 +1,5 @@
 extends State
 
 func enter() -> void:
-	get_tree().reload_current_scene()
+	character.queue_free()
+	# get_tree().reload_current_scene()

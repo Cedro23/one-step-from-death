@@ -20,6 +20,8 @@ size = Vector2(16, 16)
 size = Vector2(5, 12)
 
 [node name="Shambler" type="CharacterBody2D" unique_id=1724040096]
+collision_layer = 8
+collision_mask = 3
 script = ExtResource("1_2hdus")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1995301122]
@@ -65,12 +67,16 @@ disabled = true
 debug_color = Color(1, 0.016008649, 0.024270412, 0.41960785)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=896401867 groups=["hitbox"]]
+collision_layer = 16
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=463339632]
 shape = SubResource("RectangleShape2D_7o1q8")
 disabled = true
 
 [node name="Hurtbox" parent="." unique_id=364259304 instance=ExtResource("8_7o1q8")]
+collision_layer = 8
+collision_mask = 4
 size = 14
 
 [node name="LungeWindupTimer" type="Timer" parent="." unique_id=2096373260]
