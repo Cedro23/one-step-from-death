@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://mh0082e5w0d2" path="res://actors/player/states/roll_state.gd" id="5_a744p"]
 [ext_resource type="Script" uid="uid://c5e6gbvhs8twd" path="res://actors/player/states/attack_state.gd" id="6_388e2"]
 [ext_resource type="Script" uid="uid://b65dkmhfsyovg" path="res://debug/status_label.gd" id="7_bop6h"]
+[ext_resource type="Script" uid="uid://bme35n7gvb01l" path="res://actors/player/states/death_state.gd" id="7_lsln6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(16, 16)
@@ -36,6 +37,9 @@ script = ExtResource("5_a744p")
 
 [node name="AttackState" type="Node" parent="StateMachine" unique_id=1027895611]
 script = ExtResource("6_388e2")
+
+[node name="DeathState" type="Node" parent="StateMachine" unique_id=1334131273]
+script = ExtResource("7_lsln6")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1819048621]
 color = Color(1, 1, 0, 1)

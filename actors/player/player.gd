@@ -27,4 +27,4 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _on_hurtbox_hit() -> void:
-	get_tree().reload_current_scene()
+	state_machine.transition_to("DeathState")

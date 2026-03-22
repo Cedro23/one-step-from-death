@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b65dkmhfsyovg" path="res://debug/status_label.gd" id="5_7bp7g"]
 [ext_resource type="Script" uid="uid://doaed1r1r0iyd" path="res://actors/enemies/shambler/states/lunge_state.gd" id="5_duj33"]
 [ext_resource type="Script" uid="uid://nk72jsno0jrx" path="res://actors/enemies/shambler/states/recovery_state.gd" id="6_f3dtn"]
+[ext_resource type="Script" uid="uid://cdrkcw727iq3" path="res://actors/enemies/shambler/states/death_state.gd" id="7_7bp7g"]
 [ext_resource type="PackedScene" uid="uid://dbhn08kroce3b" path="res://components/hurtbox.tscn" id="8_7o1q8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ig7tw"]
@@ -35,6 +36,9 @@ script = ExtResource("5_duj33")
 
 [node name="RecoveryState" type="Node" parent="StateMachine" unique_id=1001115547]
 script = ExtResource("6_f3dtn")
+
+[node name="DeathState" type="Node" parent="StateMachine" unique_id=1020090192]
+script = ExtResource("7_7bp7g")
 
 [node name="StatusLabel" type="Label" parent="." unique_id=390075714 node_paths=PackedStringArray("state_machine")]
 anchors_preset = 7
