@@ -15,6 +15,10 @@ run/main_scene="uid://vx1tpxiycqu3"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*uid://bvdbis50yssho"
+
 [display]
 
 window/size/viewport_width=320
@@ -80,6 +84,7 @@ roll={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 

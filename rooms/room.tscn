@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://csl3ujr1r7pdb"]
+
+[ext_resource type="Script" uid="uid://c0t8jqy6tv16t" path="res://rooms/room.gd" id="1_nk0be"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghg5q"]
+
+[node name="Room" type="Node2D" unique_id=1751065170]
+script = ExtResource("1_nk0be")
+
+[node name="RoomArea" type="Area2D" parent="." unique_id=5253192]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea" unique_id=1344263770]
+shape = SubResource("RectangleShape2D_ghg5q")
+
+[node name="BoundsBottomRight" type="Marker2D" parent="." unique_id=227440660]
+position = Vector2(160, 90)
+
+[node name="BoundsTopLeft" type="Marker2D" parent="." unique_id=2055585322]
+position = Vector2(-160, -90)
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=175624169]
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1418161130]
+
+[node name="Exits" type="Node2D" parent="." unique_id=2026039635]

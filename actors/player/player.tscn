@@ -21,6 +21,7 @@ size = Vector2(8, 8)
 font_size = 8
 
 [node name="Player" type="CharacterBody2D" unique_id=289554604 groups=["player"]]
+z_index = 100
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_i3pqv")
@@ -100,6 +101,9 @@ text = "Status"
 label_settings = SubResource("LabelSettings_a744p")
 script = ExtResource("7_bop6h")
 state_machine = NodePath("../StateMachine")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=95924351]
+position_smoothing_enabled = true
 
 [connection signal="timeout" from="AttackHitbox/AttackDuration" to="StateMachine/AttackState" method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="AttackHitbox/AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
