@@ -2,11 +2,11 @@ class_name Player
 extends CharacterBody2D
 
 @onready var state_machine: StateMachine = $StateMachine
+@onready var sprite: Sprite2D = $Sprite2D
 
 var input_direction: Vector2
 var mouse_position: Vector2
 
-@onready var sprite: Sprite2D = $Sprite2D
 
 
 func get_input() -> void:
