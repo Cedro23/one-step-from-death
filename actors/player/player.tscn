@@ -2,7 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bmxmm8kjvf18m" path="res://actors/player/player.gd" id="1_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://d1ylwiymvmqbq" path="res://icon.svg" id="2_hqtel"]
+[ext_resource type="Script" uid="uid://x6170xq68rrd" path="res://components/state_machine.gd" id="2_lsqbn"]
+[ext_resource type="Script" uid="uid://sroyu0nraxl6" path="res://actors/player/states/idle_state.gd" id="3_6p1w3"]
 [ext_resource type="PackedScene" uid="uid://dbhn08kroce3b" path="res://components/hurtbox.tscn" id="3_ax26v"]
+[ext_resource type="Script" uid="uid://4pk4jmibk4c0" path="res://actors/player/states/run_state.gd" id="4_15y17"]
+[ext_resource type="Script" uid="uid://mh0082e5w0d2" path="res://actors/player/states/roll_state.gd" id="5_a744p"]
+[ext_resource type="Script" uid="uid://c5e6gbvhs8twd" path="res://actors/player/states/attack_state.gd" id="6_388e2"]
+[ext_resource type="Script" uid="uid://b65dkmhfsyovg" path="res://debug/status_label.gd" id="7_bop6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(16, 16)
@@ -10,8 +16,26 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 size = Vector2(8, 8)
 
+[sub_resource type="LabelSettings" id="LabelSettings_a744p"]
+font_size = 8
+
 [node name="Player" type="CharacterBody2D" unique_id=289554604 groups=["player"]]
 script = ExtResource("1_i3pqv")
+
+[node name="StateMachine" type="Node" parent="." unique_id=233320353]
+script = ExtResource("2_lsqbn")
+
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=730072226]
+script = ExtResource("3_6p1w3")
+
+[node name="RunState" type="Node" parent="StateMachine" unique_id=2140501179]
+script = ExtResource("4_15y17")
+
+[node name="RollState" type="Node" parent="StateMachine" unique_id=1222165128]
+script = ExtResource("5_a744p")
+
+[node name="AttackState" type="Node" parent="StateMachine" unique_id=1027895611]
+script = ExtResource("6_388e2")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1819048621]
 color = Color(1, 1, 0, 1)
@@ -26,14 +50,14 @@ visible = false
 shape = SubResource("RectangleShape2D_0xm2m")
 debug_color = Color(0.9627338, 0.87821406, 1.1551381e-06, 0.5411765)
 
-[node name="AttackHitBox" type="Area2D" parent="." unique_id=998222026 groups=["hitbox"]]
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=998222026 groups=["hitbox"]]
 position = Vector2(-16, -12)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitBox" unique_id=680156563]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=680156563]
 shape = SubResource("RectangleShape2D_1bvp3")
 disabled = true
 
-[node name="Timer" type="Timer" parent="AttackHitBox" unique_id=1414266864]
+[node name="Timer" type="Timer" parent="AttackHitbox" unique_id=1414266864]
 wait_time = 0.15
 one_shot = true
 
@@ -47,7 +71,24 @@ one_shot = true
 
 [node name="Hurtbox" parent="." unique_id=364259304 instance=ExtResource("3_ax26v")]
 
-[connection signal="timeout" from="AttackHitBox/Timer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
-[connection signal="timeout" from="RollCooldownTimer" to="." method="_on_roll_cooldown_timer_timeout"]
+[node name="StatusLabel" type="Label" parent="." unique_id=205891787 node_paths=PackedStringArray("state_machine")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_top = -20.0
+offset_right = 13.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Status"
+label_settings = SubResource("LabelSettings_a744p")
+script = ExtResource("7_bop6h")
+state_machine = NodePath("../StateMachine")
+
+[connection signal="timeout" from="AttackHitbox/Timer" to="StateMachine/AttackState" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="RollTimer" to="StateMachine/RollState" method="_on_roll_timer_timeout"]
+[connection signal="timeout" from="RollCooldownTimer" to="StateMachine/RunState" method="_on_roll_cooldown_timer_timeout"]
 [connection signal="hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]
