@@ -57,7 +57,6 @@ shape = SubResource("RectangleShape2D_0xm2m")
 debug_color = Color(0.9627338, 0.87821406, 1.1551381e-06, 0.5411765)
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=998222026 groups=["hitbox"]]
-position = Vector2(-16, -12)
 collision_layer = 4
 collision_mask = 8
 
@@ -65,8 +64,12 @@ collision_mask = 8
 shape = SubResource("RectangleShape2D_1bvp3")
 disabled = true
 
-[node name="Timer" type="Timer" parent="AttackHitbox" unique_id=1414266864]
-wait_time = 0.15
+[node name="AttackDuration" type="Timer" parent="AttackHitbox" unique_id=1414266864]
+wait_time = 0.05
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="AttackHitbox" unique_id=1522059773]
+wait_time = 0.35
 one_shot = true
 
 [node name="RollTimer" type="Timer" parent="." unique_id=180613411]
@@ -98,7 +101,8 @@ label_settings = SubResource("LabelSettings_a744p")
 script = ExtResource("7_bop6h")
 state_machine = NodePath("../StateMachine")
 
-[connection signal="timeout" from="AttackHitbox/Timer" to="StateMachine/AttackState" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="AttackHitbox/AttackDuration" to="StateMachine/AttackState" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="AttackHitbox/AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="RollTimer" to="StateMachine/RollState" method="_on_roll_timer_timeout"]
-[connection signal="timeout" from="RollCooldownTimer" to="StateMachine/RunState" method="_on_roll_cooldown_timer_timeout"]
+[connection signal="timeout" from="RollCooldownTimer" to="." method="_on_roll_cooldown_timer_timeout"]
 [connection signal="hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]

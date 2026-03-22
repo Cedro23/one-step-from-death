@@ -1,13 +1,18 @@
 class_name Player
 extends CharacterBody2D
 
+@export var run_speed: float = 100.0
+@export var attack_range: float = 16.0
+@export var roll_speed: float = 250.0
+
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite2D
 
 var input_direction: Vector2
 var mouse_position: Vector2
 
-
+var can_attack: bool = true
+var can_roll: bool = true
 
 func get_input() -> void:
 	input_direction = Input.get_vector("left", "right", "up", "down")
@@ -28,3 +33,9 @@ func _physics_process(_delta: float) -> void:
 
 func _on_hurtbox_hit() -> void:
 	state_machine.transition_to("DeathState")
+
+func _on_roll_cooldown_timer_timeout() -> void:
+	can_roll = true
+
+func _on_attack_cooldown_timeout() -> void:
+	can_attack = true
