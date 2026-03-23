@@ -2,21 +2,19 @@
 
 [ext_resource type="PackedScene" uid="uid://csl3ujr1r7pdb" path="res://rooms/room.tscn" id="1_0dofa"]
 [ext_resource type="PackedScene" uid="uid://c2a7f40kd7eq0" path="res://actors/enemies/shambler/shambler.tscn" id="2_bmihx"]
+[ext_resource type="PackedScene" uid="uid://b23nmptwlu15f" path="res://components/exit_door.tscn" id="3_yu30b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dofa"]
-size = Vector2(148, 16)
+size = Vector2(152, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yu30b"]
+size = Vector2(152, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gjej"]
 size = Vector2(336, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bmihx"]
 size = Vector2(16, 196)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ov23a"]
-size = Vector2(40, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yu30b"]
-size = Vector2(40, 16)
 
 [node name="Room" unique_id=1751065170 instance=ExtResource("1_0dofa")]
 
@@ -33,9 +31,12 @@ position = Vector2(94, -90)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallNorth2" index="0" unique_id=587462635]
+position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_0dofa")
 
 [node name="Polygon2D" type="Polygon2D" parent="Walls/WallNorth2" index="1" unique_id=348619262]
+position = Vector2(-2, 0)
+scale = Vector2(1.027027, 1)
 color = Color(0.7058824, 0.7058824, 0.7058824, 1)
 polygon = PackedVector2Array(-74, -8, 74, -8, 74, 8, -74, 8)
 
@@ -44,9 +45,12 @@ position = Vector2(-94, -90)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallNorth" index="0" unique_id=1358463883]
-shape = SubResource("RectangleShape2D_0dofa")
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_yu30b")
 
 [node name="Polygon2D" type="Polygon2D" parent="Walls/WallNorth" index="1" unique_id=1664902541]
+position = Vector2(2, 0)
+scale = Vector2(1.027027, 1)
 color = Color(0.7058824, 0.7058824, 0.7058824, 1)
 polygon = PackedVector2Array(-74, -8, 74, -8, 74, 8, -74, 8)
 
@@ -86,31 +90,19 @@ debug_color = Color(0, 0, 0, 0.25882354)
 color = Color(0.7058824, 0.7058824, 0.7058824, 1)
 polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
 
+[node name="BoundsBottomRight" parent="." index="3" unique_id=227440660]
+position = Vector2(152, 82)
+
+[node name="BoundsTopLeft" parent="." index="4" unique_id=2055585322]
+position = Vector2(-152, -82)
+
 [node name="SpawnPoint" parent="." index="5" unique_id=175624169]
 position = Vector2(123, 53)
 
 [node name="Shambler" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="0" unique_id=1724040096 instance=ExtResource("2_bmihx")]
 position = Vector2(-88, 16)
 
-[node name="ExitNorth" type="Node2D" parent="Exits" parent_id_path=PackedInt32Array(2026039635) index="0" unique_id=1649085683]
+[node name="ExitDoor" parent="Exits" parent_id_path=PackedInt32Array(2026039635) index="0" unique_id=64526804 instance=ExtResource("3_yu30b")]
 position = Vector2(0, -90)
-
-[node name="Exit" type="Area2D" parent="Exits/ExitNorth" index="0" unique_id=1470076126]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ExitNorth/Exit" index="0" unique_id=31324900]
-position = Vector2(0, -3)
-shape = SubResource("RectangleShape2D_ov23a")
-
-[node name="Door" type="StaticBody2D" parent="Exits/ExitNorth" index="1" unique_id=1205148704 groups=["door"]]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exits/ExitNorth/Door" index="0" unique_id=253866694]
-shape = SubResource("RectangleShape2D_yu30b")
-
-[node name="Polygon2D" type="Polygon2D" parent="Exits/ExitNorth/Door" index="1" unique_id=227370073]
-position = Vector2(-11.489362, 0)
-scale = Vector2(0.42553192, 1)
-color = Color(0.5228913, 0.352007, 0.16099644, 1)
-polygon = PackedVector2Array(-20, -8, 74, -8, 74, 8, -20, 8)
 
 [connection signal="body_entered" from="RoomArea" to="." method="_on_room_area_body_entered"]

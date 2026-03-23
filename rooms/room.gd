@@ -9,6 +9,7 @@ extends Node2D
 var is_player_inside: bool = false
 var enemies_alive: int = 0
 
+
 func _ready() -> void:
 	_setup_bounds()
 	_place_player()
@@ -39,7 +40,8 @@ func _count_enemies() -> void:
 func _on_room_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		is_player_inside = true
-		_toggle_exits(false)
+		if enemies_alive > 0:
+			_lock_exits()
 		_setup_camera(body)
 
 func _setup_camera(player: Node) -> void:
@@ -49,11 +51,19 @@ func _setup_camera(player: Node) -> void:
 	camera.limit_right = int(bounds_bottom_right.position.x)
 	camera.limit_bottom = int(bounds_bottom_right.position.y)
 
-func _toggle_exits(open: bool) -> void:
-	for door in doors:
-		door.get_node("CollisionShape2D").disabled = open
+func _lock_exits() -> void:
+	for door in $Exits.get_children():
+		door.lock()
+		door.player_exited.connect(_on_player_exited)
+
+func _unlock_exits() -> void:
+	for door in $Exits.get_children():
+		door.unlock()
+
+func _on_player_exited() -> void:
+	GameManager.go_to_next_room()
 
 func _on_enemy_died() -> void:
 	enemies_alive = max(0, enemies_alive - 1)
 	if enemies_alive == 0 and is_player_inside:
-		_toggle_exits(true)
+		_unlock_exits()

@@ -12,10 +12,8 @@ var direction: Vector2
 var rotation: float
 
 func enter() -> void:
-	var gm = get_node("/root/GameManager")
-
-	direction = (gm.player.global_position - character.global_position).normalized()
-	rotation = gm.player.global_position.angle_to_point(character.global_position)
+	direction = (GameManager.player.global_position - character.global_position).normalized()
+	rotation = GameManager.player.global_position.angle_to_point(character.global_position)
 
 	hitbox.position = direction * HITBOX_DISTANCE
 	hitbox.rotation = rotation
