@@ -1,26 +1,32 @@
 extends Node
 
 const PLAYER_SCENE = preload("res://actors/player/player.tscn")
-const ROOMS = [
-	"res://rooms/floor_1/room_01.tscn",
-	"res://rooms/floor_1/room_02.tscn",
-	"res://rooms/floor_1/room_03.tscn",
-]
+const FIRST_ROOM = "res://rooms/floor_1/room_01.tscn"
 
 var player: CharacterBody2D
-var current_room_index: int = 0
+var room_states: Dictionary = {}
+var current_room_path: String = ""
+var incoming_spawn_direction: String = "east"
 
 func _ready():
 	player = PLAYER_SCENE.instantiate()
 	add_child(player)
+	go_to_room(FIRST_ROOM, incoming_spawn_direction)
 
-func go_to_next_room() -> void:
-	current_room_index += 1
-	_load_room()
+func go_to_room(destination: String, spawn_direction: String) -> void:
+	current_room_path = destination
+	incoming_spawn_direction = spawn_direction
+
+	# Ensure state entry exists
+	if not room_states.has(destination):
+		room_states[destination] = { "cleared": false }
+
+	get_tree().change_scene_to_file(destination)
 
 func restart_run() -> void:
-	current_room_index = 0
-	_load_room()
-
-func _load_room() -> void:
-	get_tree().change_scene_to_file(ROOMS[current_room_index])
+	room_states.clear()
+	current_room_path = ""
+	incoming_spawn_direction = "east"
+	# Engine.time_scale = 1.0
+	player.get_node("StateMachine").transition_to("IdleState")
+	go_to_room(FIRST_ROOM, "east")

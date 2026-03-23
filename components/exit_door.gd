@@ -1,9 +1,11 @@
 class_name ExitDoor
 extends Area2D
 
-signal player_exited
+signal player_exited(destination, spawn_direction)
 
-@export var horizontal: bool = true  # true = horizontal door, false = vertical door
+@export var horizontal: bool = true
+@export var destination: String = ""
+@export var spawn_direction: String = ""
 
 @onready var blocking_body = $BlockingBody
 @onready var visual = $Polygon2D
@@ -13,7 +15,6 @@ var locked: bool = true
 
 func _ready() -> void:
 	_setup_orientation()
-
 
 func _setup_orientation() -> void:
 	var long_side = 32.0
@@ -46,21 +47,18 @@ func _setup_orientation() -> void:
 		Vector2(-door_size.x / 2, door_size.y / 2),
 	])
 
-
 func lock() -> void:
 	locked = true
 	blocking_body.process_mode = Node.PROCESS_MODE_INHERIT
 	visual.color = Color.RED
-
 
 func unlock() -> void:
 	locked = false
 	blocking_body.process_mode = Node.PROCESS_MODE_DISABLED
 	visual.color = Color.GREEN
 
-
 func _on_body_entered(body: Node) -> void:
 	if locked:
 		return
 	if body.is_in_group("player"):
-		player_exited.emit()
+		player_exited.emit(destination, spawn_direction)
