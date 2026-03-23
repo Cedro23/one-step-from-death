@@ -1,5 +1,7 @@
 extends State
 
+func enter() -> void:
+	character.velocity = Vector2.ZERO
 
 func physics_update(_delta: float) -> void:
 	if character.input_direction != Vector2.ZERO:
