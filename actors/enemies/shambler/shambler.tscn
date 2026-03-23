@@ -19,7 +19,7 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7o1q8"]
 size = Vector2(5, 12)
 
-[node name="Shambler" type="CharacterBody2D" unique_id=1724040096]
+[node name="Shambler" type="CharacterBody2D" unique_id=1724040096 groups=["enemy"]]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_2hdus")

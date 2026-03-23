@@ -1,11 +1,7 @@
 [gd_scene format=3 uid="uid://vx1tpxiycqu3"]
 
 [ext_resource type="PackedScene" uid="uid://dqn71ayuftovx" path="res://rooms/floor_1/room_01.tscn" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://c2a7f40kd7eq0" path="res://actors/enemies/shambler/shambler.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Node2D" unique_id=414262619]
 
 [node name="Room" parent="." unique_id=1751065170 instance=ExtResource("1_h2yge")]
-
-[node name="Shambler" parent="." unique_id=1724040096 instance=ExtResource("2_0xm2m")]
-position = Vector2(-88, 16)

@@ -35,6 +35,8 @@ project/assembly_name="One step from death"
 
 hitbox=""
 player=""
+enemy=""
+door=""
 
 [input]
 
