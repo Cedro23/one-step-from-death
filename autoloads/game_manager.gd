@@ -2,7 +2,9 @@ extends Node
 
 const PLAYER_SCENE = preload("res://actors/player/player.tscn")
 const ROOMS = [
-	"res://rooms/floor_1/room_01.tscn"
+	"res://rooms/floor_1/room_01.tscn",
+	"res://rooms/floor_1/room_02.tscn",
+	"res://rooms/floor_1/room_03.tscn",
 ]
 
 var player: CharacterBody2D
