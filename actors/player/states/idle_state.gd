@@ -8,6 +8,8 @@ func physics_update(_delta: float) -> void:
 		character.state_machine.transition_to("RunState")
 
 func _input(event: InputEvent) -> void:
+	if !character.is_alive:
+		return
 	if event is InputEventMouseButton and event.is_action_pressed("click") and character.can_attack:
 		character.can_attack = false
 		character.state_machine.transition_to("AttackState")

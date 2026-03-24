@@ -93,9 +93,7 @@ func _on_enemy_died() -> void:
 		_unlock_exits()
 
 func _mark_cleared() -> void:
-	if not GameManager.room_states.has(scene_file_path):
-		GameManager.room_states[scene_file_path] = {}
-	GameManager.room_states[scene_file_path]["cleared"] = true
+	GameManager.mark_room_cleared(scene_file_path)
 
 func _on_player_exited(destination: String, spawn_direction: String) -> void:
 	GameManager.go_to_room(destination, spawn_direction)
