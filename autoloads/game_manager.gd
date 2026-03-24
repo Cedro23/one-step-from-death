@@ -23,7 +23,6 @@ func go_to_room(destination: String, spawn_direction: String) -> void:
 		room_states[destination] = { "cleared": false }
 
 	get_tree().call_deferred("change_scene_to_file", destination)
-	# get_tree().change_scene_to_file(destination)
 
 func restart_run() -> void:
 	room_states.clear()

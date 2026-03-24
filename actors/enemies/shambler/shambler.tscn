@@ -67,7 +67,6 @@ polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1535115056]
 shape = SubResource("RectangleShape2D_h2yge")
-disabled = true
 debug_color = Color(1, 0.016008649, 0.024270412, 0.41960785)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=896401867 groups=["hitbox"]]
