@@ -96,10 +96,7 @@ position = Vector2(152, 82)
 [node name="BoundsTopLeft" parent="." index="4" unique_id=2055585322]
 position = Vector2(-152, -82)
 
-[node name="Shambler2" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="0" unique_id=1724040096 instance=ExtResource("2_bmihx")]
-position = Vector2(-64, -37)
-
-[node name="Shambler" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="1" unique_id=1456733232 instance=ExtResource("2_bmihx")]
+[node name="Shambler" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="0" unique_id=1456733232 instance=ExtResource("2_bmihx")]
 position = Vector2(-88, 16)
 
 [node name="ExitDoor" parent="Exits" parent_id_path=PackedInt32Array(2026039635) index="0" unique_id=64526804 instance=ExtResource("3_yu30b")]

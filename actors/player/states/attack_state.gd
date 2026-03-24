@@ -19,5 +19,5 @@ func physics_update(_delta: float) -> void:
 
 func _on_attack_timer_timeout() -> void:
 	attack_cooldown.start()
-	attack_hitbox_collision.disabled = true
+	attack_hitbox_collision.set_deferred("disabled", true)
 	character.state_machine.transition_to("IdleState")
