@@ -21,7 +21,6 @@ size = Vector2(5, 12)
 
 [node name="Shambler" type="CharacterBody2D" unique_id=1724040096 groups=["enemy"]]
 collision_layer = 8
-collision_mask = 3
 script = ExtResource("1_2hdus")
 lunge_speed = 500.0
 lunge_detection_distance = 80.0
