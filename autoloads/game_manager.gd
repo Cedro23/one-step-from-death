@@ -31,6 +31,10 @@ func go_to_room(destination: String, spawn_direction: String) -> void:
 	if not room_states.has(destination):
 		room_states[destination] = { "cleared": false }
 
+	Engine.time_scale = 0.0
+	await get_tree().create_timer(0.15, true, false, true).timeout
+	Engine.time_scale = 1.0
+
 	get_tree().call_deferred("change_scene_to_file", destination)
 
 func restart_run() -> void:

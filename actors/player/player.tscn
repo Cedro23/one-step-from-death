@@ -23,7 +23,6 @@ font_size = 8
 [node name="Player" type="CharacterBody2D" unique_id=289554604 groups=["player"]]
 z_index = 100
 collision_layer = 2
-collision_mask = 9
 script = ExtResource("1_i3pqv")
 
 [node name="StateMachine" type="Node" parent="." unique_id=233320353]
