@@ -1,7 +1,8 @@
-[gd_scene format=3 uid="uid://dqn71ayuftovx"]
+[gd_scene format=3 uid="uid://c3dyx4gk70eue"]
 
-[ext_resource type="PackedScene" uid="uid://csl3ujr1r7pdb" path="res://rooms/room.tscn" id="1_0dofa"]
-[ext_resource type="PackedScene" uid="uid://b23nmptwlu15f" path="res://components/exit_door.tscn" id="3_yu30b"]
+[ext_resource type="PackedScene" uid="uid://csl3ujr1r7pdb" path="res://rooms/room.tscn" id="1_li1ec"]
+[ext_resource type="PackedScene" uid="uid://c2a7f40kd7eq0" path="res://actors/enemies/shambler/shambler.tscn" id="2_ud70k"]
+[ext_resource type="PackedScene" uid="uid://b23nmptwlu15f" path="res://components/exit_door.tscn" id="3_35m3k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dofa"]
 size = Vector2(152, 16)
@@ -15,7 +16,13 @@ size = Vector2(336, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bmihx"]
 size = Vector2(16, 196)
 
-[node name="Room" unique_id=1751065170 instance=ExtResource("1_0dofa")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ud70k"]
+size = Vector2(16, 82)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_li1ec"]
+size = Vector2(16, 16)
+
+[node name="Room" unique_id=1751065170 instance=ExtResource("1_li1ec")]
 
 [node name="Floor" type="Polygon2D" parent="." index="0" unique_id=2097854744]
 
@@ -25,43 +32,43 @@ size = Vector2(16, 196)
 color = Color(0.24477637, 0.2447764, 0.24477637, 1)
 polygon = PackedVector2Array(-160, -90, 160, -90, 160, 90, -160, 90)
 
-[node name="WallNorth2" type="StaticBody2D" parent="Walls" index="1" unique_id=1384691459]
-position = Vector2(94, -90)
+[node name="WallSouth2" type="StaticBody2D" parent="Walls" index="1" unique_id=1384691459]
+position = Vector2(94, 90)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallNorth2" index="0" unique_id=587462635]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallSouth2" index="0" unique_id=587462635]
 position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_0dofa")
 
-[node name="Polygon2D" type="Polygon2D" parent="Walls/WallNorth2" index="1" unique_id=348619262]
+[node name="Polygon2D" type="Polygon2D" parent="Walls/WallSouth2" index="1" unique_id=348619262]
 position = Vector2(-2, 0)
 scale = Vector2(1.027027, 1)
 color = Color(0.7058824, 0.7058824, 0.7058824, 1)
 polygon = PackedVector2Array(-74, -8, 74, -8, 74, 8, -74, 8)
 
-[node name="WallNorth" type="StaticBody2D" parent="Walls" index="2" unique_id=251929169]
-position = Vector2(-94, -90)
+[node name="WallSouth" type="StaticBody2D" parent="Walls" index="2" unique_id=251929169]
+position = Vector2(-94, 90)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallNorth" index="0" unique_id=1358463883]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallSouth" index="0" unique_id=1358463883]
 position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_yu30b")
 
-[node name="Polygon2D" type="Polygon2D" parent="Walls/WallNorth" index="1" unique_id=1664902541]
+[node name="Polygon2D" type="Polygon2D" parent="Walls/WallSouth" index="1" unique_id=1664902541]
 position = Vector2(2, 0)
 scale = Vector2(1.027027, 1)
 color = Color(0.7058824, 0.7058824, 0.7058824, 1)
 polygon = PackedVector2Array(-74, -8, 74, -8, 74, 8, -74, 8)
 
-[node name="WallSouth" type="StaticBody2D" parent="Walls" index="3" unique_id=743834422]
-position = Vector2(0, 90)
+[node name="WallNorth" type="StaticBody2D" parent="Walls" index="3" unique_id=743834422]
+position = Vector2(0, -90)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallSouth" index="0" unique_id=1761526871]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallNorth" index="0" unique_id=1761526871]
 shape = SubResource("RectangleShape2D_5gjej")
 debug_color = Color(0, 0, 0, 0.25882354)
 
-[node name="Polygon2D" type="Polygon2D" parent="Walls/WallSouth" index="1" unique_id=1774965272]
+[node name="Polygon2D" type="Polygon2D" parent="Walls/WallNorth" index="1" unique_id=1774965272]
 color = Color(0.7058824, 0.7058824, 0.7058824, 1)
 polygon = PackedVector2Array(-168, -8, 168, -8, 168, 8, -168, 8)
 
@@ -78,14 +85,28 @@ color = Color(0.7058824, 0.7058824, 0.7058824, 1)
 polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
 
 [node name="WallEast" type="StaticBody2D" parent="Walls" index="5" unique_id=1645528037]
-position = Vector2(160, 0)
+position = Vector2(160, -57)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallEast" index="0" unique_id=432160871]
-shape = SubResource("RectangleShape2D_bmihx")
+shape = SubResource("RectangleShape2D_ud70k")
 debug_color = Color(0, 0, 0, 0.25882354)
 
 [node name="Polygon2D" type="Polygon2D" parent="Walls/WallEast" index="1" unique_id=874738525]
+scale = Vector2(1, 0.41836733)
+color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
+
+[node name="WallEast2" type="StaticBody2D" parent="Walls" index="6" unique_id=1308739290]
+position = Vector2(160, 57)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallEast2" index="0" unique_id=1365105584]
+shape = SubResource("RectangleShape2D_ud70k")
+debug_color = Color(0, 0, 0, 0.25882354)
+
+[node name="Polygon2D" type="Polygon2D" parent="Walls/WallEast2" index="1" unique_id=832065432]
+scale = Vector2(1, 0.41836733)
 color = Color(0.7058824, 0.7058824, 0.7058824, 1)
 polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
 
@@ -95,15 +116,81 @@ position = Vector2(152, 82)
 [node name="BoundsTopLeft" parent="." index="4" unique_id=2055585322]
 position = Vector2(-152, -82)
 
-[node name="ExitDoor" parent="Exits" parent_id_path=PackedInt32Array(2026039635) index="0" unique_id=64526804 instance=ExtResource("3_yu30b")]
-position = Vector2(0, -90)
-destination = "res://rooms/floor_1/room_02.tscn"
-spawn_direction = "south"
+[node name="Shambler" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="0" unique_id=1456733232 instance=ExtResource("2_ud70k")]
+position = Vector2(-88, 16)
 
-[node name="SpawnEast" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(577548926) index="0" unique_id=9932906]
-position = Vector2(0, 27)
+[node name="Shambler2" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="1" unique_id=1724040096 instance=ExtResource("2_ud70k")]
+position = Vector2(-64, -37)
 
-[node name="SpawnNorth" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(577548926) index="1" unique_id=1191175435]
-position = Vector2(0, -77)
+[node name="ExitSouth" parent="Exits" parent_id_path=PackedInt32Array(2026039635) index="0" unique_id=593643221 instance=ExtResource("3_35m3k")]
+position = Vector2(0, 90)
+destination = "res://rooms/floor_1/room_01.tscn"
+spawn_direction = "north"
+
+[node name="ExitEast" parent="Exits" parent_id_path=PackedInt32Array(2026039635) index="1" unique_id=64526804 instance=ExtResource("3_35m3k")]
+position = Vector2(160, 0)
+horizontal = false
+destination = "res://rooms/floor_1/room_03.tscn"
+spawn_direction = "west"
+
+[node name="SpawnEast" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(577548926) index="0" unique_id=2071482680]
+position = Vector2(144, 0)
+
+[node name="SpawnSouth" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(577548926) index="1" unique_id=9932906]
+position = Vector2(0, 76)
+
+[node name="Obstacles" type="Node2D" parent="." index="8" unique_id=124201464]
+
+[node name="Pillar" type="StaticBody2D" parent="Obstacles" index="0" unique_id=1069213482]
+position = Vector2(0, -30)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Pillar" index="0" unique_id=1509645277]
+shape = SubResource("RectangleShape2D_li1ec")
+debug_color = Color(0, 0, 0, 0.25882354)
+
+[node name="Polygon2D" type="Polygon2D" parent="Obstacles/Pillar" index="1" unique_id=380865775]
+scale = Vector2(1, 0.08163265)
+color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
+
+[node name="Pillar2" type="StaticBody2D" parent="Obstacles" index="1" unique_id=1936405432]
+position = Vector2(60, 14)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Pillar2" index="0" unique_id=1142549694]
+shape = SubResource("RectangleShape2D_li1ec")
+debug_color = Color(0, 0, 0, 0.25882354)
+
+[node name="Polygon2D" type="Polygon2D" parent="Obstacles/Pillar2" index="1" unique_id=209355958]
+scale = Vector2(1, 0.08163265)
+color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
+
+[node name="Pillar3" type="StaticBody2D" parent="Obstacles" index="2" unique_id=700550859]
+position = Vector2(-99, -11)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Pillar3" index="0" unique_id=915576322]
+shape = SubResource("RectangleShape2D_li1ec")
+debug_color = Color(0, 0, 0, 0.25882354)
+
+[node name="Polygon2D" type="Polygon2D" parent="Obstacles/Pillar3" index="1" unique_id=2144901223]
+scale = Vector2(1, 0.08163265)
+color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
+
+[node name="Pillar4" type="StaticBody2D" parent="Obstacles" index="3" unique_id=1561319209]
+position = Vector2(-39, 33)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/Pillar4" index="0" unique_id=1974629546]
+shape = SubResource("RectangleShape2D_li1ec")
+debug_color = Color(0, 0, 0, 0.25882354)
+
+[node name="Polygon2D" type="Polygon2D" parent="Obstacles/Pillar4" index="1" unique_id=64425275]
+scale = Vector2(1, 0.08163265)
+color = Color(0.7058824, 0.7058824, 0.7058824, 1)
+polygon = PackedVector2Array(-8, -98, 8, -98, 8, 98, -8, 98)
 
 [connection signal="body_entered" from="RoomArea" to="." method="_on_room_area_body_entered"]

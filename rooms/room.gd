@@ -7,6 +7,8 @@ extends Node2D
 @onready var enemies_node = $Enemies
 @onready var exits_node = $Exits
 
+@export var available_exits: Array[String] = []
+
 var is_player_inside: bool = false
 var enemies_alive: int = 0
 
