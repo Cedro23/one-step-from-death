@@ -1,24 +1,31 @@
 extends Node2D
 
-@onready var bounds_top_left = $BoundsTopLeft
-@onready var bounds_bottom_right = $BoundsBottomRight
-@onready var room_area = $RoomArea
+@onready var bounds_top_left: Marker2D = $BoundsTopLeft
+@onready var bounds_bottom_right: Marker2D = $BoundsBottomRight
+@onready var room_area: Area2D = $RoomArea
 
-@onready var enemies_node = $Enemies
-@onready var exits_node = $Exits
+@onready var enemies_container: Node2D = $Enemies
+@onready var exits_container: Node2D = $Exits
+@onready var spawn_points: Node2D = $SpawnPoints
 
 @export var available_exits: Array[String] = []
 
-var is_player_inside: bool = false
 var enemies_alive: int = 0
+var player_inside: bool = false
 
 
 func _ready() -> void:
 	_setup_bounds()
-	_setup_doors()
 	_place_player()
-	_check_room_state()
+	_place_exits()
 
+	if GameManager.current_room_node.cleared:
+		_free_all_enemies()
+		_unlock_exits()
+	elif enemies_container.get_child_count() >= 1:
+		_count_enemies()
+
+#region Bounds & Camera
 func _setup_bounds() -> void:
 	var top_left = bounds_top_left.position
 	var bottom_right = bounds_bottom_right.position
@@ -27,46 +34,9 @@ func _setup_bounds() -> void:
 
 	var shape = RectangleShape2D.new()
 	shape.size = size
-	room_area.get_node("CollisionShape2D").shape = shape
-	room_area.get_node("CollisionShape2D").position = center
-
-func _setup_doors() -> void:
-	for door in exits_node.get_children():
-		if not door.player_exited.is_connected(_on_player_exited):
-			door.player_exited.connect(_on_player_exited)
-
-func _place_player() -> void:
-	var player = GameManager.player
-	var spawn_name = "Spawn" + GameManager.incoming_spawn_direction.capitalize()
-	var spawn_points = $SpawnPoints
-
-	if spawn_points.has_node(spawn_name):
-		player.global_position = spawn_points.get_node(spawn_name).global_position
-	else:
-		# Fallback to first available spawn point
-		player.global_position = spawn_points.get_child(0).global_position
-
-	_setup_camera(player)
-
-func _check_room_state() -> void:
-	var state = GameManager.room_states.get(scene_file_path, {})
-	if state.get("cleared", false):
-		_free_all_enemies()
-		_unlock_exits()
-	else:
-		_count_enemies()
-		_lock_exits()
-
-func _count_enemies() -> void:
-	for enemy in enemies_node.get_children():
-		enemies_alive += 1
-		enemy.tree_exited.connect(_on_enemy_died)
-
-func _on_room_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		is_player_inside = true
-		if enemies_alive > 0:
-			_lock_exits()
+	var area_collision = room_area.get_node("CollisionShape2D")
+	area_collision.shape = shape
+	area_collision.position = center
 
 func _setup_camera(player: Node) -> void:
 	var camera = player.get_node("Camera2D")
@@ -74,28 +44,80 @@ func _setup_camera(player: Node) -> void:
 	camera.limit_top = int(bounds_top_left.position.y)
 	camera.limit_right = int(bounds_bottom_right.position.x)
 	camera.limit_bottom = int(bounds_bottom_right.position.y)
+#endregion
 
-func _lock_exits() -> void:
-	for door in exits_node.get_children():
-		door.lock()
+#region Player Placement
+func _place_player() -> void:
+	var player = GameManager.player
+	if player == null:
+		push_error("Room: GameManager.player is null")
+	
+	var spawn_point: Marker2D = _get_spawn_point(GameManager.incoming_spawn_direction)
+	if spawn_point:
+		player.global_position = spawn_point.global_position
+	else:
+		# Fallback to center of room if no matching spawn point found
+		player.global_position = (bounds_top_left.global_position + bounds_bottom_right.global_position) / 2.0
+		push_warning("Room: no spawn point found for direction '%s', using center" % GameManager.incoming_spawn_direction)
 
+	_setup_camera(player)
 
-func _unlock_exits() -> void:
-	for door in exits_node.get_children():
-		door.unlock()
+func _get_spawn_point(direction: String) -> Marker2D:
+	for child in spawn_points.get_children():
+		if child.name.to_lower() == "spawn" + direction.to_lower():
+			return child
+	return null
+#endregion
 
-func _free_all_enemies() -> void:
-	for enemy in enemies_node.get_children():
-		enemy.queue_free()
+#region Exit Wiring
+func _place_exits() -> void:
+	for exit in exits_container.get_children():
+		var direction: String = exit.exit_direction
+		if GameManager.current_room_node.connections.has(direction):
+			exit.destination_node = GameManager.current_room_node.connections[direction]
+		else:
+			# No connection in this direction - hide the door entirely
+			exit.hide()
+#endregion
+
+#region Enemy Tracking
+func _count_enemies() -> void:
+	for enemy in enemies_container.get_children():
+		enemies_alive += 1
+		enemy.tree_exited.connect(_on_enemy_died)
 
 func _on_enemy_died() -> void:
 	enemies_alive = max(0, enemies_alive - 1)
-	if enemies_alive == 0 and is_player_inside:
-		_mark_cleared()
+	if enemies_alive == 0 and player_inside:
+		GameManager.mark_room_cleared()
 		_unlock_exits()
 
-func _mark_cleared() -> void:
-	GameManager.mark_room_cleared(scene_file_path)
+func _free_all_enemies() -> void:
+	for enemy in enemies_container.get_children():
+		enemy.queue_free()
+#endregion
 
-func _on_player_exited(destination: String, spawn_direction: String) -> void:
-	GameManager.go_to_room(destination, spawn_direction)
+#region Exits Lock / Unlock
+func _lock_exits() -> void:
+	for exit in exits_container.get_children():
+		if not exit.visible:
+			continue
+		exit.lock()
+
+
+func _unlock_exits() -> void:
+	for exit in exits_container.get_children():
+		if not exit.visible:
+			continue
+		exit.unlock()
+#endregion
+
+#region Player Entry Detection
+func _on_room_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") and not player_inside:
+		player_inside = true
+
+		if not GameManager.current_room_node.cleared:
+			if enemies_alive >= 1:
+				_lock_exits()
+#endregion

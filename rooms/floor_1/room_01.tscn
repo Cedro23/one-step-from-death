@@ -23,6 +23,7 @@ size = Vector2(16, 82)
 size = Vector2(16, 16)
 
 [node name="Room" unique_id=1751065170 instance=ExtResource("1_li1ec")]
+available_exits = Array[String](["south", "east"])
 
 [node name="Floor" type="Polygon2D" parent="." index="0" unique_id=2097854744]
 
@@ -124,14 +125,11 @@ position = Vector2(-64, -37)
 
 [node name="ExitSouth" parent="Exits" parent_id_path=PackedInt32Array(2026039635) index="0" unique_id=593643221 instance=ExtResource("3_35m3k")]
 position = Vector2(0, 90)
-destination = "res://rooms/floor_1/room_01.tscn"
-spawn_direction = "north"
 
 [node name="ExitEast" parent="Exits" parent_id_path=PackedInt32Array(2026039635) index="1" unique_id=64526804 instance=ExtResource("3_35m3k")]
 position = Vector2(160, 0)
+exit_direction = "east"
 horizontal = false
-destination = "res://rooms/floor_1/room_03.tscn"
-spawn_direction = "west"
 
 [node name="SpawnEast" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(577548926) index="0" unique_id=2071482680]
 position = Vector2(144, 0)

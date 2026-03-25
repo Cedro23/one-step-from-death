@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cyxdf00repdiq"]
 
-[ext_resource type="PackedScene" uid="uid://csl3ujr1r7pdb" path="res://rooms/room.tscn" id="1_d1dk5"]
-[ext_resource type="PackedScene" uid="uid://b23nmptwlu15f" path="res://components/exit_door.tscn" id="2_qggop"]
-[ext_resource type="PackedScene" uid="uid://c2a7f40kd7eq0" path="res://actors/enemies/shambler/shambler.tscn" id="3_rjgqw"]
+[ext_resource type="PackedScene" uid="uid://csl3ujr1r7pdb" path="res://rooms/room.tscn" id="1_7cp2f"]
+[ext_resource type="PackedScene" uid="uid://c2a7f40kd7eq0" path="res://actors/enemies/shambler/shambler.tscn" id="2_0qdx1"]
+[ext_resource type="PackedScene" uid="uid://b23nmptwlu15f" path="res://components/exit_door.tscn" id="2_nnfmc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yu30b"]
 size = Vector2(336, 16)
@@ -19,7 +19,8 @@ size = Vector2(16, 82)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_li1ec"]
 size = Vector2(16, 16)
 
-[node name="Room" unique_id=1751065170 instance=ExtResource("1_d1dk5")]
+[node name="Room" unique_id=1751065170 instance=ExtResource("1_7cp2f")]
+available_exits = Array[String](["west"])
 
 [node name="Floor" type="Polygon2D" parent="." index="0" unique_id=2097854744]
 
@@ -97,25 +98,24 @@ position = Vector2(152, 82)
 [node name="BoundsTopLeft" parent="." index="4" unique_id=2055585322]
 position = Vector2(-152, -82)
 
-[node name="Shambler" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="0" unique_id=1456733232 instance=ExtResource("3_rjgqw")]
+[node name="Shambler" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="0" unique_id=1456733232 instance=ExtResource("2_0qdx1")]
 position = Vector2(40, 26)
 
-[node name="Shambler2" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="1" unique_id=1724040096 instance=ExtResource("3_rjgqw")]
+[node name="Shambler2" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="1" unique_id=1724040096 instance=ExtResource("2_0qdx1")]
 position = Vector2(64, -27)
 
-[node name="Shambler3" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="2" unique_id=185666237 instance=ExtResource("3_rjgqw")]
+[node name="Shambler3" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="2" unique_id=185666237 instance=ExtResource("2_0qdx1")]
 position = Vector2(87, 51)
 
-[node name="Shambler4" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="3" unique_id=549962284 instance=ExtResource("3_rjgqw")]
+[node name="Shambler4" parent="Enemies" parent_id_path=PackedInt32Array(1418161130) index="3" unique_id=549962284 instance=ExtResource("2_0qdx1")]
 position = Vector2(111, -2)
 
-[node name="ExitWest" parent="Exits" parent_id_path=PackedInt32Array(2026039635) index="0" unique_id=64526804 instance=ExtResource("2_qggop")]
+[node name="ExitWest" parent="Exits" parent_id_path=PackedInt32Array(2026039635) index="0" unique_id=64526804 instance=ExtResource("2_nnfmc")]
 position = Vector2(-160, 0)
+exit_direction = "west"
 horizontal = false
-destination = "res://rooms/floor_1/room_02.tscn"
-spawn_direction = "east"
 
-[node name="SpawnEast" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(577548926) index="0" unique_id=9932906]
+[node name="SpawnWest" type="Marker2D" parent="SpawnPoints" parent_id_path=PackedInt32Array(577548926) index="0" unique_id=9932906]
 position = Vector2(-145, 0)
 
 [node name="Obstacles" type="Node2D" parent="." index="8" unique_id=124201464]

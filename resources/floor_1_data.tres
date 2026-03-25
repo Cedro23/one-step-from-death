@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="FloorData" format=3 uid="uid://e1f758q5qjti"]
+
+[ext_resource type="Script" uid="uid://bhchvutuwtr6g" path="res://components/room_data.gd" id="1_jqgj0"]
+[ext_resource type="PackedScene" uid="uid://cyxdf00repdiq" path="res://rooms/floor_1/boss_01.tscn" id="2_0rmpx"]
+[ext_resource type="Script" uid="uid://djryfpm6fysrt" path="res://components/floor_data.gd" id="2_am72s"]
+[ext_resource type="PackedScene" uid="uid://dqn71ayuftovx" path="res://rooms/floor_1/entry_01.tscn" id="2_x3bib"]
+[ext_resource type="PackedScene" uid="uid://c3dyx4gk70eue" path="res://rooms/floor_1/room_01.tscn" id="2_xkxe3"]
+
+[sub_resource type="Resource" id="Resource_3qtur"]
+script = ExtResource("1_jqgj0")
+scene = ExtResource("2_0rmpx")
+exits = Array[String](["west"])
+metadata/_custom_type_script = "uid://bhchvutuwtr6g"
+
+[sub_resource type="Resource" id="Resource_0rmpx"]
+script = ExtResource("1_jqgj0")
+scene = ExtResource("2_xkxe3")
+exits = Array[String](["south", "east"])
+metadata/_custom_type_script = "uid://bhchvutuwtr6g"
+
+[sub_resource type="Resource" id="Resource_xkxe3"]
+script = ExtResource("1_jqgj0")
+scene = ExtResource("2_x3bib")
+exits = Array[String](["north"])
+metadata/_custom_type_script = "uid://bhchvutuwtr6g"
+
+[resource]
+script = ExtResource("2_am72s")
+entry_rooms = Array[ExtResource("1_jqgj0")]([SubResource("Resource_xkxe3")])
+combat_rooms = Array[ExtResource("1_jqgj0")]([SubResource("Resource_0rmpx")])
+boss_rooms = Array[ExtResource("1_jqgj0")]([SubResource("Resource_3qtur")])
+metadata/_custom_type_script = "uid://djryfpm6fysrt"
