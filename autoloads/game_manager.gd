@@ -20,12 +20,12 @@ var incoming_spawn_direction: String = FIRST_SPAWN_DIRECTION
 
 #region Initialisation
 func _ready():
-	player = PLAYER_SCENE.instantiate()
-	add_child(player)
+	# player = PLAYER_SCENE.instantiate()
+	# add_child(player)
 
-	game_over_screen = GAME_OVER_SCENE.instantiate()
-	add_child(game_over_screen)
-	game_over_screen.hide()
+	# game_over_screen = GAME_OVER_SCENE.instantiate()
+	# add_child(game_over_screen)
+	# game_over_screen.hide()
 
 	start_floor(FIRST_FLOOR)
 #endregion
@@ -34,7 +34,7 @@ func _ready():
 func start_floor(floor_number: int) -> void:
 	current_floor = floor_number
 	floor_graph = FloorGenerator.generate_floor(floor_number)
-	go_to_room(floor_graph[0], FIRST_SPAWN_DIRECTION)
+	# go_to_room(floor_graph[0], FIRST_SPAWN_DIRECTION)
 
 func advance_floor() -> void:
 	if current_floor < 3:
