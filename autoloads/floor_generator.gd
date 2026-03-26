@@ -1,5 +1,6 @@
 extends Node
 
+# Comment just to add something
 @export var floors_data: Array[FloorData] = []
 
 const MIN_COMBAT_ROOMS: int = 4
