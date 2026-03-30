@@ -74,7 +74,8 @@ func _place_exits() -> void:
 	for exit in exits_container.get_children():
 		var direction: String = exit.exit_direction
 		if GameManager.current_room_node.connections.has(direction):
-			exit.destination_node = GameManager.current_room_node.connections[direction]
+			pass
+			# exit.destination_node = GameManager.current_room_node.connections[direction]
 		else:
 			# No connection in this direction - hide the door entirely
 			exit.hide()

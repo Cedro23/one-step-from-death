@@ -1,10 +1,7 @@
 [gd_scene format=3 uid="uid://cqorqymbxb84e"]
 
 [ext_resource type="Script" uid="uid://bnqxqinse2w55" path="res://autoloads/floor_generator.gd" id="1_ns66h"]
-[ext_resource type="Script" uid="uid://djryfpm6fysrt" path="res://components/floor_data.gd" id="2_t6vks"]
-[ext_resource type="Resource" uid="uid://e1f758q5qjti" path="res://resources/floor_1_data.tres" id="3_t7npo"]
 
 [node name="floor_generator" type="Node" unique_id=1619720868]
 script = ExtResource("1_ns66h")
-_start = Vector2i(-1, -1)
-floors_data = Array[ExtResource("2_t6vks")]([ExtResource("3_t7npo")])
+_start = Vector2i(4, 3)

@@ -72,5 +72,6 @@ func _on_body_entered(body: Node) -> void:
 	GameManager.go_to_room(destination_node, _incoming_direction())
 
 func _incoming_direction() -> String:
-	return RoomNode.opposite_direction(exit_direction)
+	return ""
+	# return RoomNode.opposite_direction(exit_direction)
 #endregion

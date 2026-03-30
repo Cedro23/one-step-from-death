@@ -13,7 +13,7 @@ var player: CharacterBody2D
 var game_over_screen: CanvasLayer
 
 var current_floor: int = 1
-var floor_graph: Array[RoomNode] = []
+var floor_graph: Array = []
 var current_room_node: RoomNode = null
 var incoming_spawn_direction: String = FIRST_SPAWN_DIRECTION
 #endregion
@@ -26,13 +26,11 @@ func _ready():
 	# game_over_screen = GAME_OVER_SCENE.instantiate()
 	# add_child(game_over_screen)
 	# game_over_screen.hide()
-
 	start_floor(FIRST_FLOOR)
 #endregion
 
 #region Floor Management
 func start_floor(floor_number: int) -> void:
-	current_floor = floor_number
 	floor_graph = FloorGenerator.generate_floor(floor_number)
 	# go_to_room(floor_graph[0], FIRST_SPAWN_DIRECTION)
 
