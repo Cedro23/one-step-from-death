@@ -25,3 +25,5 @@ position = Vector2(-160, -90)
 [node name="Exits" type="Node2D" parent="." unique_id=2026039635]
 
 [node name="SpawnPoints" type="Node2D" parent="." unique_id=577548926]
+
+[node name="TileMap" type="Node2D" parent="." unique_id=1267423842]

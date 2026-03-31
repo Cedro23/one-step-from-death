@@ -1,5 +1,5 @@
 extends Node
-#region Constraints
+
 @export_group("Constraints")
 @export var _dimensions: Vector2i = Vector2i(7, 5)
 @export var _start: Vector2i = Vector2i(3, 0)
@@ -10,7 +10,6 @@ extends Node
 @export var _crit_path_max: int = 20
 @export var _branches: int = 3
 @export var _branch_length: Vector2i = Vector2i(1, 4)
-#endregion
 
 var dungeon: Array
 var _branch_candidates: Array[Vector2i]
@@ -36,7 +35,7 @@ func _place_entrance():
 	if _start.y < 0 or _start.y >= _dimensions.y:
 		_start.y = randi_range(0, _dimensions.y - 1)
 
-	var room = RoomNode.new("S")
+	var room = RoomNode.new(Vector2i(_start.x, _start.y))
 	room.set_type(Enums.RoomType.ENTRY)
 	dungeon[_start.x][_start.y] = room
 
@@ -57,7 +56,7 @@ func _generate_path(from: Vector2i, length: int, end_of_path: Array[Enums.RoomTy
 		if (current.x + direction.x >= 0 and current.x + direction.x < _dimensions.x and 
 			current.y + direction.y >= 0 and current.y + direction.y < _dimensions.y and
 			not dungeon[current.x + direction.x][current.y + direction.y]):
-			var room_node = RoomNode.new("P")
+			var room_node = RoomNode.new(Vector2i(current.x + direction.x, current.y + direction.y))
 			if length <= 1:
 				var room_type = end_of_path[randi_range(0, len(end_of_path) - 1)]
 				room_node.set_type(room_type)
@@ -95,7 +94,7 @@ func _generate_branches() -> void:
 
 func _print_dungeon() -> void:
 	var dungeon_as_string: String = ""
-	for y in range(_dimensions.y - 1, -1, -1):
+	for y in range(_dimensions.y):
 		for x in _dimensions.x:
 			if dungeon[x][y]:
 				dungeon_as_string += "[" + str(dungeon[x][y].room_type) + "]"

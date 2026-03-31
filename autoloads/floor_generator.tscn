@@ -4,4 +4,4 @@
 
 [node name="floor_generator" type="Node" unique_id=1619720868]
 script = ExtResource("1_ns66h")
-_start = Vector2i(4, 3)
+_start = Vector2i(-1, -1)

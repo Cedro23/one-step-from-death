@@ -1,14 +1,13 @@
 class_name RoomNode
 extends RefCounted
 
-var marker: String
+var position: Vector2i = Vector2i.ZERO
 var room_type: Enums.RoomType = Enums.RoomType.EMPTY
 var connections: Dictionary[Enums.ExitDirection, RoomNode] = {}
 var cleared: bool = false
 
-
-func _init(p_marker: String) -> void:
-	marker = p_marker
+func _init(p_position: Vector2i) -> void:
+	position = p_position
 
 func set_type(type: Enums.RoomType) -> void:
 	room_type = type

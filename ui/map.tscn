@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dn0rmyx48jov8"]
+
+[ext_resource type="Script" uid="uid://bathbacslfu2j" path="res://ui/map.gd" id="1_73axm"]
+
+[node name="Map" type="CanvasLayer" unique_id=1222040422]
+script = ExtResource("1_73axm")
+
+[node name="Control" type="Control" parent="." unique_id=1677154341]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1714235359]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1728327, 0.17283267, 0.17283267, 0.39215687)
+
+[node name="Rooms" type="Control" parent="Control" unique_id=1545908799]
+anchors_preset = 0
+
+[node name="Connections" type="Control" parent="Control" unique_id=1651270821]
+anchors_preset = 0
